@@ -17,7 +17,7 @@ apply plugin: 'spring-boot'
 apply plugin: 'docker'
 
 jar {
-    baseName = 'gs-spring-boot-docker'
+    baseName = 'roppa-api-backend'
     version =  '0.1.0'
 }
 
