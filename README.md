@@ -1,6 +1,7 @@
 # Roppa API Backend
 
 Lightweight Java API Backend
+* The goal of this project is making a framework fit to microservice and should sustain a performance-critical service.
 
 ### Prerequisities
 
