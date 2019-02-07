@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '2.0.0.RELEASE'
+        springBootVersion = '2.1.2.RELEASE'
     }
     repositories {
         mavenCentral()
@@ -10,7 +10,7 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-        classpath("gradle.plugin.com.palantir.gradle.docker:gradle-docker:0.19.2")
+        classpath("gradle.plugin.com.palantir.gradle.docker:gradle-docker:0.21.0")
     }
 }
 
@@ -27,8 +27,8 @@ bootJar {
     version =  '0.1.0'
 }
 
-sourceCompatibility = 1.9
-targetCompatibility = 1.9
+project.sourceCompatibility = 11
+project.targetCompatibility = 11
 
 repositories {
     mavenCentral()
@@ -38,7 +38,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
     compile("org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}")
     compile("org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}")
-    compile("org.mariadb.jdbc:mariadb-java-client:2.2.2")
+    compile("org.mariadb.jdbc:mariadb-java-client:2.4.0")
 
     // To resolve deprecated package dependencies in the JDK9.
     // Besides we can use module-info.java, but this package will be removed in the JDK10.
