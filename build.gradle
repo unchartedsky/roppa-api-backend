@@ -47,10 +47,6 @@ dependencies {
     testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '4.6'
-}
-
 docker {
     name "${project.group}/${jar.baseName}"
     dockerfile = file('src/main/docker/Dockerfile')
