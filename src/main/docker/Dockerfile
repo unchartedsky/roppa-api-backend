@@ -1,4 +1,4 @@
-FROM y1sh/roppa-java
+FROM openjdk:11.0.2-jdk-slim
 MAINTAINER Seung-hwan Linus Lee "yish8213@gmail.com"
 ENV APPLICATION_NAME roppa-api-backend
 ENV ENVIRONMENT development
