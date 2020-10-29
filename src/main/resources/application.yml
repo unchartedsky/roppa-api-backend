@@ -4,18 +4,15 @@ server:
 #Actuator
 management:
   server:
-    port: 9000
+    port: 8080
     address: 127.0.0.1
 
-#MariaDB
 spring:
-  datasource:
-    url: jdbc:mariadb://127.0.0.1:3306/ROPPA
-    username: roppa
-    password: r0ppa!
-    driver-class-name: org.mariadb.jdbc.Driver
-  jpa:
-    hibernate:
-      ddl-auto: validate
-
+  profiles:
+    active: local
+  output:
+    ansi:
+      enabled: detect
+  jooq:
+    sql-dialect: mariadb
 ---

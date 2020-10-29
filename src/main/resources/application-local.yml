@@ -1,0 +1,16 @@
+logging:
+  level:
+    root: debug
+
+#MariaDB
+spring:
+  datasource:
+    driverClassName: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://127.0.0.1:3306/roppa
+    username: roppa
+    password: r0ppa!
+
+schedule:
+  investing:
+    example: true
+---
