@@ -7,7 +7,7 @@ services:
      restart: always
      environment:
        MYSQL_ROOT_PASSWORD: r00t!
-       MYSQL_DATABASE: ROPPA
+       MYSQL_DATABASE: roppa
        MYSQL_USER: roppa
        MYSQL_PASSWORD: r0ppa!
        MYSQL_CHARSET: utf8

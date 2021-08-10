@@ -1,15 +1,12 @@
 package roppa.apibackend.investing.repository;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jooq.JooqTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static roppa.apibackend.database.tables.Watchlist.WATCHLIST;
 
-@RunWith(SpringRunner.class)
 @JooqTest
 public class ExampleRepositoryTest {
 

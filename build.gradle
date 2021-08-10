@@ -1,10 +1,10 @@
 plugins {
-    id 'org.springframework.boot' version '2.3.4.RELEASE'
-    id 'io.spring.dependency-management' version '1.0.10.RELEASE'
-    id 'nu.studer.jooq' version '5.1.1'
+    id 'org.springframework.boot' version '2.5.3'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'nu.studer.jooq' version '6.0'
     id 'java'
-    id 'com.palantir.docker' version '0.25.0'
-    id 'org.owasp.dependencycheck' version '6.0.2'
+    id 'com.palantir.docker' version '0.27.0'
+    id 'org.owasp.dependencycheck' version '6.2.2'
 }
 
 group = 'y1sh'
@@ -17,7 +17,7 @@ repositories {
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(11)
+        languageVersion = JavaLanguageVersion.of(16)
     }
 }
 
@@ -28,6 +28,7 @@ dependencies {
     implementation('org.springframework.boot:spring-boot-starter-web') {
         exclude module: 'spring-boot-starter-tomcat'
     }
+    implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-quartz'
     implementation 'org.springframework.boot:spring-boot-starter-undertow'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
@@ -46,11 +47,15 @@ dependencies {
     testAnnotationProcessor 'org.projectlombok:lombok'
 
     // MapStruct
-    implementation 'org.mapstruct:mapstruct:1.4.1.Final'
-    annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.1.Final'
+    implementation 'org.mapstruct:mapstruct:1.4.2.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
 
     // Test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+    useJUnitPlatform()
 }
 
 jooq {
@@ -78,6 +83,7 @@ jooq {
                     generate {
                         deprecated = false
                         records = true
+                        pojos = true
                         immutablePojos = false
                         fluentSetters = true
                     }
