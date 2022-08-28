@@ -20,7 +20,7 @@ import roppa.apibackend.database.tables.Watchlist;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Roppa extends SchemaImpl {
 
-    private static final long serialVersionUID = -344963502;
+    private static final long serialVersionUID = 1L;
 
     /**
      * The reference instance of <code>roppa</code>

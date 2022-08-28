@@ -18,6 +18,7 @@ import org.jooq.TableField;
 import org.jooq.TableOptions;
 import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;
+import org.jooq.impl.SQLDataType;
 import org.jooq.impl.TableImpl;
 
 import roppa.apibackend.database.Keys;
@@ -31,7 +32,7 @@ import roppa.apibackend.database.tables.records.WatchlistRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Watchlist extends TableImpl<WatchlistRecord> {
 
-    private static final long serialVersionUID = -1377766630;
+    private static final long serialVersionUID = 1L;
 
     /**
      * The reference instance of <code>roppa.watchlist</code>
@@ -49,18 +50,19 @@ public class Watchlist extends TableImpl<WatchlistRecord> {
     /**
      * The column <code>roppa.watchlist.company_name</code>.
      */
-    public final TableField<WatchlistRecord, String> COMPANY_NAME = createField(DSL.name("company_name"), org.jooq.impl.SQLDataType.VARCHAR(100).nullable(false), this, "");
+    public final TableField<WatchlistRecord, String> COMPANY_NAME = createField(DSL.name("company_name"), SQLDataType.VARCHAR(100).nullable(false), this, "");
 
     /**
      * The column <code>roppa.watchlist.per</code>.
      */
-    public final TableField<WatchlistRecord, Integer> PER = createField(DSL.name("per"), org.jooq.impl.SQLDataType.INTEGER.defaultValue(org.jooq.impl.DSL.field("NULL", org.jooq.impl.SQLDataType.INTEGER)), this, "");
+    public final TableField<WatchlistRecord, Integer> PER = createField(DSL.name("per"), SQLDataType.INTEGER.defaultValue(DSL.field("NULL", SQLDataType.INTEGER)), this, "");
 
-    /**
-     * Create a <code>roppa.watchlist</code> table reference
-     */
-    public Watchlist() {
-        this(DSL.name("watchlist"), null);
+    private Watchlist(Name alias, Table<WatchlistRecord> aliased) {
+        this(alias, aliased, null);
+    }
+
+    private Watchlist(Name alias, Table<WatchlistRecord> aliased, Field<?>[] parameters) {
+        super(alias, null, aliased, parameters, DSL.comment(""), TableOptions.table());
     }
 
     /**
@@ -77,12 +79,11 @@ public class Watchlist extends TableImpl<WatchlistRecord> {
         this(alias, WATCHLIST);
     }
 
-    private Watchlist(Name alias, Table<WatchlistRecord> aliased) {
-        this(alias, aliased, null);
-    }
-
-    private Watchlist(Name alias, Table<WatchlistRecord> aliased, Field<?>[] parameters) {
-        super(alias, null, aliased, parameters, DSL.comment(""), TableOptions.table());
+    /**
+     * Create a <code>roppa.watchlist</code> table reference
+     */
+    public Watchlist() {
+        this(DSL.name("watchlist"), null);
     }
 
     public <O extends Record> Watchlist(Table<O> child, ForeignKey<O, WatchlistRecord> key) {

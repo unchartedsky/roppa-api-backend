@@ -8,7 +8,7 @@ import roppa.apibackend.database.tables.Watchlist;
 
 
 /**
- * Convenience access to all tables in roppa
+ * Convenience access to all tables in roppa.
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Tables {

@@ -23,6 +23,8 @@ java {
     }
 }
 
+sourceSets.main.java.srcDirs = ['src/generated','src/main/java']
+
 dependencies {
     // Spring
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
@@ -40,7 +42,7 @@ dependencies {
     jooqGenerator 'org.mariadb.jdbc:mariadb-java-client'
 
     // jooq
-    implementation 'org.jooq:jooq-codegen'
+    implementation 'org.jooq:jooq-codegen:3.17.3'
 
     // lombok
     compileOnly 'org.projectlombok:lombok'
@@ -91,7 +93,7 @@ jooq {
                     }
                     target {
                         packageName = "roppa.apibackend.database"
-                        directory = "src/main/java"
+                        directory = "src/generated"
                     }
                     strategy.name = 'org.jooq.codegen.DefaultGeneratorStrategy'
                 }

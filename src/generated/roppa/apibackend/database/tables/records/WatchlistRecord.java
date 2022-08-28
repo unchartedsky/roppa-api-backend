@@ -19,7 +19,7 @@ import roppa.apibackend.database.tables.Watchlist;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class WatchlistRecord extends UpdatableRecordImpl<WatchlistRecord> implements Record2<String, Integer> {
 
-    private static final long serialVersionUID = -367726056;
+    private static final long serialVersionUID = 1L;
 
     /**
      * Setter for <code>roppa.watchlist.company_name</code>.
@@ -140,7 +140,7 @@ public class WatchlistRecord extends UpdatableRecordImpl<WatchlistRecord> implem
     public WatchlistRecord(String companyName, Integer per) {
         super(Watchlist.WATCHLIST);
 
-        set(0, companyName);
-        set(1, per);
+        setCompanyName(companyName);
+        setPer(per);
     }
 }
