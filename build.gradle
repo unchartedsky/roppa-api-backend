@@ -1,10 +1,12 @@
+import nu.studer.gradle.jooq.JooqEdition
+
 plugins {
-    id 'org.springframework.boot' version '2.5.3'
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-    id 'nu.studer.jooq' version '6.0'
+    id 'org.springframework.boot' version '2.7.3'
+    id 'io.spring.dependency-management' version '1.0.13.RELEASE'
+    id 'nu.studer.jooq' version '7.1.1'
     id 'java'
-    id 'com.palantir.docker' version '0.27.0'
-    id 'org.owasp.dependencycheck' version '6.2.2'
+    id 'com.palantir.docker' version '0.34.0'
+    id 'org.owasp.dependencycheck' version '7.1.2'
 }
 
 group = 'y1sh'
@@ -17,7 +19,7 @@ repositories {
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(16)
+        languageVersion = JavaLanguageVersion.of(17)
     }
 }
 
@@ -47,8 +49,8 @@ dependencies {
     testAnnotationProcessor 'org.projectlombok:lombok'
 
     // MapStruct
-    implementation 'org.mapstruct:mapstruct:1.4.2.Final'
-    annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+    implementation 'org.mapstruct:mapstruct:1.5.2.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.2.Final'
 
     // Test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -60,7 +62,7 @@ test {
 
 jooq {
     version = dependencyManagement.importedProperties['jooq.version']
-    edition = nu.studer.gradle.jooq.JooqEdition.OSS  // the default (can be omitted)
+    edition = JooqEdition.OSS  // the default (can be omitted)
 
     configurations {
         roppa {  // name of the jOOQ configuration
