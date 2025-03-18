@@ -1,12 +1,9 @@
-import nu.studer.gradle.jooq.JooqEdition
-
 plugins {
-    id 'org.springframework.boot' version '2.7.3'
-    id 'io.spring.dependency-management' version '1.0.13.RELEASE'
-    id 'nu.studer.jooq' version '7.1.1'
-    id 'java'
-    id 'com.palantir.docker' version '0.34.0'
-    id 'org.owasp.dependencycheck' version '7.1.2'
+    id 'java-library'
+    id 'org.springframework.boot' version '3.4.3'
+    id 'io.spring.dependency-management' version '1.1.7'
+    id 'nu.studer.jooq' version '10.0'
+    id 'org.owasp.dependencycheck' version '12.1.0'
 }
 
 group = 'y1sh'
@@ -19,7 +16,7 @@ repositories {
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
+        languageVersion = JavaLanguageVersion.of(23)
     }
 }
 
@@ -42,7 +39,7 @@ dependencies {
     jooqGenerator 'org.mariadb.jdbc:mariadb-java-client'
 
     // jooq
-    implementation 'org.jooq:jooq-codegen:3.17.3'
+    implementation 'org.jooq:jooq-codegen:3.20.2'
 
     // lombok
     compileOnly 'org.projectlombok:lombok'
@@ -61,6 +58,8 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+import nu.studer.gradle.jooq.JooqEdition
 
 jooq {
     version = dependencyManagement.importedProperties['jooq.version']
@@ -87,8 +86,7 @@ jooq {
                     generate {
                         deprecated = false
                         records = true
-                        pojos = true
-                        immutablePojos = false
+                        immutablePojos = true
                         fluentSetters = true
                     }
                     target {
@@ -100,11 +98,4 @@ jooq {
             }
         }
     }
-}
-
-docker {
-    name "${group}/${archivesBaseName}"
-    dockerfile = file('src/main/docker/Dockerfile')
-    files bootJar.archiveFile
-    buildArgs(['JAR_FILE': "${bootJar.archiveFileName.get()}"])
 }
