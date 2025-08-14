@@ -1,37 +1,38 @@
 # Roppa API Backend
 
-Lightweight Java API Backend
-* The goal of this project is making a framework fit to microservice and should sustain a performance-critical service.
+Lightweight, general-purpose Java/Spring-based backend API framework.
 
-### Prerequisities
+## 📦 Tech Stack
 
-If you want to run this project you need to install Docker Engine. If you use a Mac or Windows platform Docker Toolbox is the recommended solution.
+- **Java**: 24 (requires JDK 24+)
+- **Spring Boot**: 3.3.x or later *(required for Java 22+ support — ensure you are on the latest compatible version for Java 24)*
+- **Build Tool**: Gradle
+- **Database Access**: jOOQ (mutable POJO)
+- **Embedded WAS**: Jetty 12 (Servlet 6.0 support)
+- **Mapping**: MapStruct
 
-```
-Java 8+
-Docker Engine - https://docs.docker.com/engine/installation/#installation
-```
+## 🔍 Overview
 
-### Installing
+- General-purpose API backend with clean layering and explicit repository boundaries.
+- jOOQ is used **only** in the repository layer; no `Record` types leak upward.
+- DTO ↔ POJO conversion is handled by MapStruct.
+- Embedded container defaults to **Jetty 12**; Tomcat is excluded.
 
-A step by step series of examples that tell you have to get a development env running
+## 📋 Development Notes
 
-Use Docker CLI and build this project by using Gradle
+### 1) Mutable POJO Considerations
+- Loss of immutability → avoid modifying shared instances.
+- Concurrency → use within request scope; do not cache mutable entities as map keys.
+- jOOQ is not an ORM: mutating POJOs does **not** auto-persist; call explicit `update` queries.
 
-```
-$ ./gradlew build buildDocker
-```
+### 2) MapStruct
+- Update `@Mapping` whenever field names change.
+- Consider `nullValuePropertyMappingStrategy` if you need strict null-handling.
 
-And you can run it like this
+### 3) Jetty
+- Jetty 12 is standardized for Servlet 6.0 & HTTP/3.
 
-```
-$ docker run -p 8080:8080 -t y1sh/roppa-api-backend
-```
+---
 
-The application is then available on http://localhost:8080. When using a Mac, you must visit the IP address in DOCKER_HOST instead of localhost. In this case, application is available on http://DOCKER_HOST_IP_ADDRESS:8080
-
-## Built With
-
-* Spring Boot
-* Docker
-* Gradle
+## 📄 License
+MIT (follow the repository's LICENSE file).
