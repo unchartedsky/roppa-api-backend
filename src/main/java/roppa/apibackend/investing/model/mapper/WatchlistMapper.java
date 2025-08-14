@@ -5,7 +5,7 @@ import org.mapstruct.Mapping;
 import roppa.apibackend.database.tables.pojos.Watchlist;
 import roppa.apibackend.investing.model.dto.WatchlistDTO;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface WatchlistMapper {
 
     @Mapping(target = "perValue", source = "entity.per")

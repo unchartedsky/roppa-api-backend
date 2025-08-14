@@ -1,5 +1,5 @@
-import org.springframework.boot.gradle.tasks.bundling.BootJar
 import nu.studer.gradle.jooq.JooqEdition
+import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
     id 'java'
@@ -24,11 +24,9 @@ java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(24)
     }
-    withSourcesJar()
-    withJavadocJar()
 }
 
-sourceSets.main.java.srcDirs = ['src/generated','src/main/java']
+sourceSets.main.java.srcDirs = ['src/generated', 'src/main/java']
 
 configurations {
     compileOnly { extendsFrom annotationProcessor }
@@ -76,7 +74,7 @@ dependencies {
 
     // Test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testRuntimeOnly    'org.junit.platform:junit-platform-launcher'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 // JUnit platform and Virtual Threads in tests
@@ -88,12 +86,7 @@ tasks.withType(Test).configureEach {
 // Reproducible builds and strict encoding
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
-    options.release  = 24
-}
-
-// Run with Virtual Threads enabled
-bootRun {
-    jvmArgs += ['-Dspring.threads.virtual.enabled=true']
+    options.release = 24
 }
 
 // Layered bootJar for better Docker caching
@@ -101,6 +94,19 @@ tasks.named('bootJar', BootJar) {
     // Enable layered jar and keep defaults
     layered {
         enabled = true               // required: call with a closure
+    }
+}
+
+// Align EVERYTHING from group 'org.jooq' that sneaks into jooqGenerator
+configurations.named('jooqGenerator').configure {
+    resolutionStrategy {
+        failOnVersionConflict() // make conflicts loud
+        eachDependency { d ->
+            if (d.requested.group == 'org.jooq') {
+                d.useVersion(jooqVersion)
+                d.because("Force a single jOOQ version on jooqGenerator to avoid JAXB/XSD mismatches")
+            }
+        }
     }
 }
 
@@ -128,9 +134,10 @@ jooq {
                         inputSchema = 'roppa'
                     }
                     generate {
+                        pojos = true
                         deprecated = false
                         records = true
-                        immutablePojos = true
+                        immutablePojos = false
                         fluentSetters = true
                     }
                     target {
@@ -142,4 +149,9 @@ jooq {
             }
         }
     }
+}
+
+// Run with Virtual Threads enabled
+bootRun {
+    jvmArgs += ['-Dspring.threads.virtual.enabled=true']
 }

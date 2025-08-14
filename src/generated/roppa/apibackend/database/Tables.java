@@ -10,7 +10,7 @@ import roppa.apibackend.database.tables.Watchlist;
 /**
  * Convenience access to all tables in roppa.
  */
-@SuppressWarnings({ "all", "unchecked", "rawtypes" })
+@SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class Tables {
 
     /**
