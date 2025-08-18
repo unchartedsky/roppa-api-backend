@@ -10,16 +10,14 @@ Lightweight, general-purpose Java/Spring-based backend API framework.
 - **Database Access**: jOOQ (mutable POJO)
 - **Embedded WAS**: Jetty 12 (Servlet 6.0 support)
 - **Mapping**: MapStruct
-<br>
-<br>
+<br><br>
 ## 🔍 Overview
 
 - General-purpose API backend with clean layering and explicit repository boundaries.
 - jOOQ is used **only** in the repository layer; no `Record` types leak upward.
 - DTO ↔ POJO conversion is handled by MapStruct.
 - Embedded container defaults to **Jetty 12**; Tomcat is excluded.
-<br>
-<br>
+<br><br>
 ## 📋 Development Notes
 
 ### 1) Mutable POJO Considerations
@@ -33,8 +31,7 @@ Lightweight, general-purpose Java/Spring-based backend API framework.
 
 ### 3) Jetty
 - Jetty 12 is standardized for Servlet 6.0 & HTTP/3.
-<br>
-<br>
+<br><br>
 ## 🚀 Build & Run
 
 ```bash
